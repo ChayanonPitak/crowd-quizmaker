@@ -28,6 +28,6 @@ Team: 0N3 N16H7 PR0J3C7 *(One night project)*
 | Suwat Inkaew | Tee | 610610521 | Tester | [swik999](https://github.com/swik999/) | 
 | Kritsanaphong Tepweerakul | Keang | 630610714 | Developer and Business Analyst | [thegenggo](https://github.com/thegenggo/) |
 | Kitpisan Tanngan | Pete | 630610716 | Tester and Designer | [DifficultIV](https://github.com/DifficultIV) |
-| Chayanon Pitak | Pungpond | 630610724 | Project Manager and Systeam Analyst | [IkaWaAyuMu](https://github.com/IkaWaAyuMu) |
+| Chayanon Pitak | Pungpond | 630610724 | Project Manager and System Analyst | [IkaWaAyuMu](https://github.com/IkaWaAyuMu) |
 | Nadtaphong Jandaboot | Man | 630610743 | Tester and Designer | [BottlesMan](https://github.com/BottlesMan) |
 | Woranut Kitchakan | Wan | 630610760 | Developer and Designer | [NuChyyyy](https://github.com/NuChyyyy) |
