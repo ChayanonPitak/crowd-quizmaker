@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{report}
 \usepackage{hyperref}
 \usepackage{blindtext}
+\usepackage{titlesec}
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -8,7 +9,7 @@
 \usepackage{tikz}
 
 \graphicspath{ {./images/} }
-\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{0.5em}{}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
 \hypersetup{
@@ -19,6 +20,7 @@
 
 \begin{document}
     \begin{titlepage}
+        % Title Page
         \noindent\rule{\textwidth}{5pt} \\
         \begin{flushright}
             \Huge\textbf{A2 - System Requirements Specification} \\[2\baselineskip]
@@ -36,5 +38,142 @@
             } \\[2\baselineskip]
             \large{\href{https://github.com/ChayanonPitak/261361-Project/}{https://github.com/ChayanonPitak/261361-Project/}}
         \end{flushright}
+        \pagebreak
+
+        \LARGE\textbf{Revision History} \\[0.5\baselineskip]
+        \normalsize{
+            \begin{tabular}{| m{6em} | m{5em} | m{13em} | m{5em} |}
+                \hline
+                \textbf{Name} & \textbf{Date} & \textbf{Reason for changes} & \textbf{Version}\\ 
+                \hline\hline
+                Chayanon & 5 Jan 2023 & Initial draft & 0.1 \\
+                \hline
+            \end{tabular}
+        }
     \end{titlepage}
+
+    \pagenumbering{alph}
+
+    % Table of Contents
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Contents}
+    \renewcommand*\contentsname{Table of Contents}
+    \tableofcontents
+    \pagebreak
+
+    \pagenumbering{arabic}
+    % Introduction
+    \chapter{Introduction}
+        % Purpose
+        \section{Purpose}
+        % Scope
+        \section{Scope}
+        % Product Overview
+        \section{Product Overview}
+            % Product Perspective
+            \subsection{Product Perspective}
+            % Product Functions
+            \subsection{Product Functions}
+            % User Characteristics
+            \subsection{User Characteristics}
+            % Limitations
+            \subsection{Limitations}
+        % Definitions
+        \section{Definitions}
+    \pagebreak
+
+    % References
+    \chapter{References}
+    \pagebreak
+
+    % Specific Requirements
+    \chapter{Specific Requirements}
+        % External Interface
+        \section{External Interface}
+            % User Interfaces
+            \subsection{User Interfaces}
+            % Hardware Interfaces
+            \subsection{Hardware Interfaces}
+            % Software Interfaces
+            \subsection{Software Interfaces}
+            % Communications Interfaces
+            \subsection{Communications Interfaces}
+        % Function
+        \section{Functions}
+        % Usability Requirements
+        \section{Usability Requirements}
+        % Performance Requirements
+        \section{Performance Requirements}
+        % Logical Database Requirements
+        \section{Logical Database Requirements}
+        % Design Constraints
+        \section{Design Constraints}
+        % Software System Attributes
+        \section{Software System Attributes}
+        % Supporting Information
+        \section{Supporting Information}
+    \pagebreak
+
+    % Verification
+    \chapter{Verification}
+        % External Interface
+        \section{External Interface}
+            % User Interfaces
+            \subsection{User Interfaces}
+            % Hardware Interfaces
+            \subsection{Hardware Interfaces}
+            % Software Interfaces
+            \subsection{Software Interfaces}
+            % Communications Interfaces
+            \subsection{Communications Interfaces}
+        % Function
+        \section{Functions}
+        % Usability Requirements
+        \section{Usability Requirements}
+        % Performance Requirements
+        \section{Performance Requirements}
+        % Logical Database Requirements
+        \section{Logical Database Requirements}
+        % Design Constraints
+        \section{Design Constraints}
+        % Software System Attributes
+        \section{Software System Attributes}
+        % Supporting Information
+        \section{Supporting Information}
+    \pagebreak
+
+    \pagenumbering{roman}
+
+    % Appendix
+    \chapter{Appendix}
+        % Asumptions and Dependencies
+        \section{Asumptions and Dependencies}
+        % Acronyms and Abbreviations
+        \section{Acronyms and Abbreviations}
+
+        % ---- ASSIGNMENT REQUIREMENTS ----
+
+        % A1 - Responsibility
+        \section{A1 - responsibility}
+        \begin{itemize}
+            \item \textbf{Suwat Inkaew 610610521} (0\%) - 
+            \item \textbf{Kritsanaphong Tepweerakul 630610714} (0\%) - Have a conversation with stakeholder(s) about project (Prof. Sakgasit Ramingwong / 23 Dec 2022)
+            \item \textbf{Kitpisan Tanngan 630610716} (0\%) - 
+            \item \textbf{Chayanon Pitak 630610724} (0\%) - Docuent setup, Have a conversation with stakeholder(s) about project (Prof. Sakgasit Ramingwong / 23 Dec 2022)
+            \item \textbf{Nadtaphong Jandaboot 630610743} (0\%) - 
+            \item \textbf{Woranut Kitchakan 630610760} (0\%) - 
+        \end{itemize}
+
+        % A2 - Responsibility percentage calculation
+        \section{A2 - Responsibility percentage calculation}
+
+        Activities that not directly contribute to the document
+        \begin{itemize}
+            \item Have a conversation with stakeholder(s) about project 0\% each sessions
+        \end{itemize}
+        \indent\indent Activities that is directly contribute to the document
+        \begin{itemize}
+            \item Document setup 0\%
+        \end{itemize}
+
 \end{document}
