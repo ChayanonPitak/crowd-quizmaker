@@ -124,28 +124,62 @@
         \section{External Interface}
             % System Interfaces
             \subsection{System Interfaces}
-            % User Interfaces
+            The application will retrieve the registration information for the required course from "canvas.cmu.ac.th" in the form of JSON. This will provide the registration information for the application.
             \subsection{User Interfaces}
+            The user interface will be simple to understand for all the user that uses this application. We will design a new user interface for our application using our experience and knowledge that doesn't consist of any standard. The reason is to eliminate the difficulty of the user's understanding of our application interface. 
             % Hardware Interfaces
             \subsection{Hardware Interfaces}
+            No extra hardware interfaces are needed.
             % Software Interfaces
             \subsection{Software Interfaces}
+            The application will use the GraphQL API from Canvas.
             % Communications Interfaces
             \subsection{Communications Interfaces}
+            The application will use the HTTP protocol to communicate with the client. So, an internet connection is required.
         % Functions
         \section{Functions}
+        The system shall let the user be able to create and manage quiz topics. Next, the user shall be able to review, comment, evaluate and report quiz. Finally, the user shall be able to import user from Canvas.
         % Usability Requirements
         \section{Usability Requirements}
+        The system shall be able to operate normally without any errors or server issues. Also, it shall be simple to use for every user.
         % Performance Requirements
         \section{Performance Requirements}
+        \begin{itemize}
+        \item \textbf{Respond Time}: The system shall have a response time of fewer than 10 seconds for topic-related requests, except for adding contributors shall not have a responce time greater than 30 seconds.  
+        \item \textbf{Throughput}: The system shall be able to handle 500 simultaneous users and shall be able to handle at least 100 requests per second.
+        \item \textbf{Memory usage}: The system shall use no more than 1 GB of memory under normal conditions. 
+        \item \textbf{CPU usage}: The system shall require atleast 4 core of CPU under normal conditions.
+        \item \textbf{Storage}: The system shall be able to store up to atleast 1 TB of data.
+        \item \textbf{Avalibility}: The system shall always be available to the user all the time.
+        \end{itemize}
         % Logical Database Requirements
         \section{Logical Database Requirements}
+        \begin{enumerate}
+            \item The database shall be able to store user information and quiz data.
+            \item The database shall always be able to provide data for the server most of the time.
+            \item The database shall be able to ensure that each role of user can access their interface by their role.
+        \end{enumerate}
         % Design Constraints
         \section{Design Constraints}
+        \begin{itemize}
+        \item \textbf{Time}: This application must be complete within 2-3 weeks.
+        \item \textbf{Resource}: This application project team has 6 members.
+        \item \textbf{Scalability}: The system must be design to support a minimum of 500 simultaneous users.
+        \item \textbf{Deployment}: The system must be deployable to server-based and client-based infrastructure.
+        \end{itemize}
         % Software System Attributes
         \section{Software System Attributes}
+        \begin{itemize}
+            \item \textbf{Reliability}: The system shall be able to perform an intended function without unexpected errors.
+            \item \textbf{Maintainability}: The system shall be easy to maintain and update.
+            \item \textbf{Portability}: The system shall be able to run on multiple operating system, including Window, Mac, Android and iOS.
+        \end{itemize}
         % Supporting Information
         \section{Supporting Information}
+        \begin{enumerate}
+            \item The application shall be able to run on every modern browsers.
+            \item The application shall not send any personal data of the user to the internet or an unknown source.
+        \end{enumerate}
     \pagebreak
 
     % Verification
@@ -164,16 +198,45 @@
         \section{Functions}
         % Usability Requirements
         \section{Usability Requirements}
+        Tester will test the app and send feedback about user experience.
         % Performance Requirements
         \section{Performance Requirements}
+        \begin{itemize}
+            \item \textbf{Respond Time}: Tester will test by reckon system's response time.  
+            \item \textbf{Throughput}: Tester will test by sending requests to system.
+            \item \textbf{Memory usage}: Tester will test by performance monitoring while running application.
+            \item \textbf{CPU usage}: Tester will test by performance monitoring while running application.
+            \item \textbf{Storage}: Tester will test by performance monitoring while running application.
+            \item \textbf{Avalibility}: Tester will test by uptime monitoring.
+            \end{itemize}
         % Logical Database Requirements
         \section{Logical Database Requirements}
+        \begin{enumerate}
+            \item Tester will test by send requests about user information and quiz data.
+            \item Tester will test by uptime monitoring about data.
+            \item Tester will test by access each rolls and test.
+        \end{enumerate}
         % Design Constraints
         \section{Design Constraints}
+        \begin{itemize}
+            \item \textbf{Time}: Verification by scrum meeting, github Kanbanboard to check progress on implementation.
+            \item \textbf{Resource}: Have a verification on skills and progress done by each members.
+            \item \textbf{Scalability}: Verification by sending requests to system.
+            \item \textbf{Deployment}: Verification by show connection between server and client.
+        \end{itemize}
         % Software System Attributes
         \section{Software System Attributes}
+        \begin{itemize}
+            \item \textbf{Reliability}: Verification by test at most as possibe expected errors.
+            \item \textbf{Maintainability}: Verification by change some part and it will done by few steps and don't have any causes to another parts.
+            \item \textbf{Portability}: Verification by testing application on multiple operating system.
+        \end{itemize}
         % Supporting Information
         \section{Supporting Information}
+        \begin{enumerate}
+            \item Verification by testing application on multiple modern browsers.
+            \item Verification by penetration test.
+        \end{enumerate}
     \pagebreak
 
     \pagenumbering{roman}
