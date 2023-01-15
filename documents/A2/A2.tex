@@ -74,14 +74,35 @@
         \section{Product Overview}
             % Product Perspective
             \subsection{Product Perspective}
+            This product is a web application that can be accessed from any devices that have internet connection. The application will be a cross-platform (Windows, MacOS, iOS, Android) web application. The application is a quiz platform that any one can contribute to quizzes. The quizzes can be academic or non-academic.
             % Product Functions
             \subsection{Product Functions}
+            The application consits of two part - Central system which provide the API, quizzes database storage and quizzes manager. And user client that allow any users to create quiz topic, manage quiz topic - moderate, manage, view and evaluate quiz content, contribute to quizzes - create, answer and review, and add support to Canvas LMS.
             % User Characteristics
             \subsection{User Characteristics}
+            The user classes of this systems will be:
+            \begin{enumerate}
+                \item Administrator: Lecturer team of 261111 - Internet and Online Community, Chiang Mai University or any one who have the permission to manage the system. Responsible for manage, support and operate whole systems - both central system and clients.
+                \item Course Lecturer: Any course lecturer who wish to use this system. Responsible for manage the quizzes topic, moderate quizzes content, evaluate quiz topic and/or Canvas LMS intregration.
+                \item Course student: Student from courses. Responsible for Canvas LMS connection and contribute to quizzes from courses - create answer and review.  
+                \item Quiz Admin: Anyone who want to create quizzes topic. Responsible for create/manage the quizzes topic, moderate quizzes content and evaluate quizz topic.
+                \item Quiz Contributor: Anyone who want to contribute to quiz topic. Responsible for create, answer and review quizzes from quiz topics.
+            \end{enumerate}
             % Limitations
             \subsection{Limitations}
+            Currently we do not have any limitations from the requirements of stakeholders, but it may including but not limited to hardware performance limitstions, storage limitations, internet connection limitations, specific course content, local regulations and etc. We will update this section if we have any exact limitations to update.
         % Definitions
         \section{Definitions}
+        \begin{itemize}
+            \item \textbf{Central system}: The API provider, quizzes database storage and quizzes manager. Only accessible by administrator.
+            \item \textbf{Client}: The user interface that allow any users to interact with our systems - Manage and moderate quiz topics and contribute to quizzes.
+            \item \textbf{Quiz}: A set of questions and answers that can be answered by users.
+            \item \textbf{Quiz Topic}: A topic that contain quizzes.
+            \item \textbf{Quiz Admin}: An user that can create/manage quiz topic, moderate quizzes content and evaluate quiz topic.
+            \item \textbf{Quiz Contributor}: An user that can contribute to quiz topic - create, answer and review quizzes.
+            \item \textbf{Course lecturer or lecturer}: A course lecturer which have same permissions as Quiz Admin.
+            \item \textbf{Course student or student}: A student which have same permissions as Quiz Contributor.
+        \end{itemize}
     \pagebreak
 
     % References
