@@ -1,0 +1,213 @@
+\documentclass[ 10pt]{report}
+\usepackage[a4paper, total={6.5in, 10in}]{geometry}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tikz}
+
+\graphicspath{ {./images/} }
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{0.5em}{}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,   
+    urlcolor=cyan,
+}
+
+\begin{document}
+    \begin{titlepage}
+        % Title Page
+        \noindent\rule{\textwidth}{5pt} \\
+        \begin{flushright}
+            \Huge\textbf{A2 - System Requirements Specification} \\[2\baselineskip]
+            \large\textbf{for} \\
+            \huge\textbf{Crowd Quizmaker} \\[2\baselineskip]
+            \large\textbf{Version 0.1} \\[2\baselineskip]
+            \large\textbf{Prepared by} \LARGE\textbf{0N3 N16H7 PR0J3C7} \\[0.5\baselineskip]
+            \normalsize{
+                Suwat Inkaew 610610521 \\
+                Kritsanaphong Tepweerakul 630610714 \\
+                Kitpisan Tanngan 630610716 \\
+                Chayanon Pitak 630610724 \\
+                Nadtaphong Jandaboot 630610743 \\
+                Woranut Kitchakan 630610760
+            } \\[2\baselineskip]
+            \large{\href{https://github.com/ChayanonPitak/261361-Project/}{https://github.com/ChayanonPitak/261361-Project/}}
+        \end{flushright}
+        \pagebreak
+
+        \LARGE\textbf{Revision History} \\[0.5\baselineskip]
+        \normalsize{
+            \begin{tabular}{| m{8em} | m{6em} | m{20em} | m{5em} |}
+                \hline
+                \textbf{Name} & \textbf{Date} & \textbf{Reason for changes} & \textbf{Version}\\ 
+                \hline\hline
+                Chayanon & 5 Jan 2023 & Initial draft & 0.1 \\
+                \hline
+            \end{tabular}
+        }
+    \end{titlepage}
+
+    \pagenumbering{alph}
+
+    % Table of Contents
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Table of Contents}
+    \renewcommand*\contentsname{Table of Contents}
+    \tableofcontents
+    \pagebreak
+
+    \pagenumbering{arabic}
+    % Introduction
+    \chapter{Introduction}
+        % Purpose
+        \section{Purpose}
+        Lecturer team of 261111 - Internet and Online Community, Chiang Mai University have created this course to create realize in technology, internet and online community and proper behaviour of using it. Originally, the course itself are using typical way of evaluate the understanding - assignments and exams which is one-way activities. The lecturer team have decided to create a new way of evaluate the understanding of the students by creating a quiz application that students also contribute the quiz creation from the knowledge they have learned from the course and try to answer and review the contributed quizzes. The application will be called Crowd Quizmaker.
+        \section{Scope}
+        Our software (Crowd Quizmaker) will be a cross-platform (Windows, MacOS, iOS, Android) web application that lecturer (or quiz admin) can create a quiz topic and students (or anyone - as quiz contributor) can contribute to a quiz - create, answer and review. Any users can be quizzes admin and/or quiz contributor and quizzes topic doesn't need to be academic purpose. Quizzes admin can specify what can quizzes contributor do.
+        % Product Overview
+        \section{Product Overview}
+            % Product Perspective
+            \subsection{Product Perspective}
+            This product is a web application that can be accessed from any devices that have internet connection. The application will be a cross-platform (Windows, MacOS, iOS, Android) web application. The application is a quiz platform that any one can contribute to quizzes. The quizzes can be academic or non-academic.
+            % Product Functions
+            \subsection{Product Functions}
+            The application consits of two part - Central system which provide the API, quizzes database storage and quizzes manager. And user client that allow any users to create quiz topic, manage quiz topic - moderate, manage, view and evaluate quiz content, contribute to quizzes - create, answer and review, and add support to Canvas LMS.
+            % User Characteristics
+            \subsection{User Characteristics}
+            The user classes of this systems will be:
+            \begin{enumerate}
+                \item Administrator: Lecturer team of 261111 - Internet and Online Community, Chiang Mai University or any one who have the permission to manage the system. Responsible for manage, support and operate whole systems - both central system and clients.
+                \item Course Lecturer: Any course lecturer who wish to use this system. Responsible for manage the quizzes topic, moderate quizzes content, evaluate quiz topic and/or Canvas LMS intregration.
+                \item Course student: Student from courses. Responsible for Canvas LMS connection and contribute to quizzes from courses - create answer and review.  
+                \item Quiz Admin: Anyone who want to create quizzes topic. Responsible for create/manage the quizzes topic, moderate quizzes content and evaluate quizz topic.
+                \item Quiz Contributor: Anyone who want to contribute to quiz topic. Responsible for create, answer and review quizzes from quiz topics.
+            \end{enumerate}
+            % Limitations
+            \subsection{Limitations}
+            Currently we do not have any limitations from the requirements of stakeholders, but it may including but not limited to hardware performance limitstions, storage limitations, internet connection limitations, specific course content, local regulations and etc. We will update this section if we have any exact limitations to update.
+        % Definitions
+        \section{Definitions}
+        \begin{itemize}
+            \item \textbf{Central system}: The API provider, quizzes database storage and quizzes manager. Only accessible by administrator.
+            \item \textbf{Client}: The user interface that allow any users to interact with our systems - Manage and moderate quiz topics and contribute to quizzes.
+            \item \textbf{Quiz}: A set of questions and answers that can be answered by users.
+            \item \textbf{Quiz Topic}: A topic that contain quizzes.
+            \item \textbf{Quiz Admin}: An user that can create/manage quiz topic, moderate quizzes content and evaluate quiz topic.
+            \item \textbf{Quiz Contributor}: An user that can contribute to quiz topic - create, answer and review quizzes.
+            \item \textbf{Course lecturer or lecturer}: A course lecturer which have same permissions as Quiz Admin.
+            \item \textbf{Course student or student}: A student which have same permissions as Quiz Contributor.
+        \end{itemize}
+    \pagebreak
+
+    % References
+    \chapter{References}
+    \noindent ISO/IEC/IEEE 29148:2018 \\
+    \href{https://ieeexplore.ieee.org/document/8559686}{https://ieeexplore.ieee.org/document/8559686} \\
+    Systems and software engineering -- System and software requirements engineering -- System requirements specification \\\\
+
+    \noindent CPE111 - Internet and Online Community facebook pages \\
+    \href{https://www.facebook.com/CPE111/}{https://www.facebook.com/CPE111/} \\\\
+
+    \noindent Canvas Learning Management System \\
+    \href{https://www.instructure.com/en-au/canvas/}{https://www.instructure.com/en-au/canvas/} \\\\
+    \pagebreak
+
+    % Specific Requirements
+    \chapter{Specific Requirements}
+        % External Interfaces
+        \section{External Interface}
+            % System Interfaces
+            \subsection{System Interfaces}
+            % User Interfaces
+            \subsection{User Interfaces}
+            % Hardware Interfaces
+            \subsection{Hardware Interfaces}
+            % Software Interfaces
+            \subsection{Software Interfaces}
+            % Communications Interfaces
+            \subsection{Communications Interfaces}
+        % Functions
+        \section{Functions}
+        % Usability Requirements
+        \section{Usability Requirements}
+        % Performance Requirements
+        \section{Performance Requirements}
+        % Logical Database Requirements
+        \section{Logical Database Requirements}
+        % Design Constraints
+        \section{Design Constraints}
+        % Software System Attributes
+        \section{Software System Attributes}
+        % Supporting Information
+        \section{Supporting Information}
+    \pagebreak
+
+    % Verification
+    \chapter{Verification}
+        % External Interface
+        \section{External Interface}
+            % User Interfaces
+            \subsection{User Interfaces}
+            % Hardware Interfaces
+            \subsection{Hardware Interfaces}
+            % Software Interfaces
+            \subsection{Software Interfaces}
+            % Communications Interfaces
+            \subsection{Communications Interfaces}
+        % Function
+        \section{Functions}
+        % Usability Requirements
+        \section{Usability Requirements}
+        % Performance Requirements
+        \section{Performance Requirements}
+        % Logical Database Requirements
+        \section{Logical Database Requirements}
+        % Design Constraints
+        \section{Design Constraints}
+        % Software System Attributes
+        \section{Software System Attributes}
+        % Supporting Information
+        \section{Supporting Information}
+    \pagebreak
+
+    \pagenumbering{roman}
+
+    % Appendix
+    \chapter{Appendix}
+        % Asumptions and Dependencies
+        \section{Asumptions and Dependencies}
+        % Acronyms and Abbreviations
+        \section{Acronyms and Abbreviations}
+
+        % ---- ASSIGNMENT REQUIREMENTS ----
+
+        % A1 - Responsibility
+        \section{A1 - responsibility}
+        \begin{itemize}
+            \item \textbf{Suwat Inkaew 610610521} (0\%) - 
+            \item \textbf{Kritsanaphong Tepweerakul 630610714} (0\%) - Consult with stakeholder(s) about project (Prof. Sakgasit Ramingwong / 23 Dec 2022)
+            \item \textbf{Kitpisan Tanngan 630610716} (0\%) - 
+            \item \textbf{Chayanon Pitak 630610724} (0\%) - Docuent setup, Consult with stakeholder(s) about project (Prof. Sakgasit Ramingwong / 23 Dec 2022)
+            \item \textbf{Nadtaphong Jandaboot 630610743} (0\%) - 
+            \item \textbf{Woranut Kitchakan 630610760} (0\%) - 
+        \end{itemize}
+
+        % A2 - Responsibility percentage calculation
+        \section{A2 - Responsibility percentage calculation}
+
+        Activities that not directly contribute to the document
+        \begin{itemize}
+            \item Consult with stakeholder(s) 0\% each sessions
+        \end{itemize}
+        \indent\indent Activities that is directly contribute to the document
+        \begin{itemize}
+            \item Document setup 0\%
+        \end{itemize}
+
+\end{document}
