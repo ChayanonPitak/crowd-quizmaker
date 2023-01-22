@@ -19,7 +19,7 @@ Project for course 261361 - Software Engineering.
 
  - [A1 - Project Proposal](./documents/A1/A1.pdf)
  - [A2 - System Requirements Specification](./documents/A2/A2.pdf)
- - [A3 - System Requirements Specification](./documents/A3/A3.pdf)
+ - [A3 - Design Specification (A-DAPT)](./documents/A3/A3.pdf)
 
 # Our team
 Team: 0N3 N16H7 PR0J3C7 *(One night project)*
