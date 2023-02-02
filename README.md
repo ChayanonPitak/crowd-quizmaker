@@ -15,7 +15,7 @@ Project for course 261361 - Software Engineering.
 
 # Overview
 
-(Software overview and target user group here)
+Crowd Quizmaker, cross-platform web application that lecturer (or quiz admin) can create a quiz topic and students (or anyone - as quiz contributor) can contribute to a quiz - including create, answer and review.
 
 # Tech stack
 
@@ -23,8 +23,10 @@ Project for course 261361 - Software Engineering.
 
 # Documents
 
-- [A1 - Project Proposal](./documents/A1/A1.pdf)
-- [A2 - System Requirements Specification](./documents/A2/A2.pdf)
+ - [A1 - Project Proposal](./documents/A1/A1.pdf)
+ - [A2 - System Requirements Specification](./documents/A2/A2.pdf)
+ - [A3 - Design Specification (A-DAPT)](./documents/A3/A3.pdf)
+
 
 # Our team
 
