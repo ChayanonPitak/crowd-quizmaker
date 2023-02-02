@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "husky": "^8.0.3"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "install": "cd ./source/ && pnpm install",
+    "prepare": "husky install"
+  }
+}
