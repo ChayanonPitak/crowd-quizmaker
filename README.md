@@ -54,7 +54,7 @@ _(Sort by Student ID)_
 ## setup
 
 ```bash
-pnpm run
+pnpm
 ```
 
 For more on development, see [source](./source/)
