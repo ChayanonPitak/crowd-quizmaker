@@ -61,6 +61,8 @@
                 \hline
                 Chayanon, Kritsanaphong, Nadtaphong & 15 Jan 2023 & Complete Appendix Section & 1.0 \\
                 \hline
+                Chayanon & 6 Feb 2023 & Specific requirements on Functions Requirements (3.4) & 1.1 \\
+                \hline
             \end{tabular}
         }
     \end{titlepage}
@@ -150,7 +152,16 @@
             The application will use the HTTP protocol to communicate with the client. So, an internet connection is required.
         % Functions
         \section{Functions}
-        The system shall let the user be able to create and manage quiz topics. Next, the user shall be able to review, comment, evaluate and report quiz. Finally, the user shall be able to import user from Canvas.
+        The system shall
+        \begin{enumerate}
+            \item \textbf{Let user create quiz topic} which contains topic name, tags(optional), contributors(optional), format(multiple choices and/or text area), and distribution(question only, answer only or both).
+            \item \textbf{Let quiz topic admin manage quiz topic} on topic name, contributors, format, and distribution and delete whole quiz topic.
+            \item \textbf{Let quiz topic admin moderate quizzes content} on contributors' question, answer and review.
+            \item \textbf{Let contrubutor create question to the quiz topic} based on quiz topic distribution and format. Contributor shall define the question, tag(depends on admin), answer(s) and correct answer(s).
+            \item \textbf{Let contrubutor attempt to answer and review the question to the quiz topic} based on quiz topic distribution. System shall random the question based on distribution settings. User shall answer the question and review the question - rate, comment and/or report. (only quiz topic admin can see the review)
+            \item \textbf{Evaluate the user's quiz attempt} which visualize the result of the quiz attempt. The result contains correct answer count on that attempt.
+            \item \textbf{Let quiz topic admin evaluate the quiz topic} which visualize the result of the quiz attempt. The result contains correct answer count on questions and questions' review.
+        \end{enumerate}
         % Usability Requirements
         \section{Usability Requirements}
         The system shall be able to operate normally without any errors or server issues. Also, it shall be simple to use for every user.
@@ -281,6 +292,7 @@
         \indent At the second sprint (about three weeks - Until 16th Feburary 2023) additional from thr first sprint, our product should be able to moderate quiz topics on subtopics, tag, contribution period, complete quiz contribution and distribution setup, do additional quiz contributions - review and report.  Evaluate quiz topics on additional content - correctness statistics on each subtopics, tags. Integration with Canvas LMS. \\
         \pagebreak
 
+        Only include until 1.0
         % A1 - Responsibility
         \section{A1 - responsibility}
         \begin{itemize}
