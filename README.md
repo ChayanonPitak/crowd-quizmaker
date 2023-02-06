@@ -11,7 +11,7 @@ Project for course 261361 - Software Engineering.
 
 ---
 
-- [Contribution](#contribution)
+- [Development](#development)
 
 # Overview
 
