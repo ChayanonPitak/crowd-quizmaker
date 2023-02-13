@@ -13,7 +13,9 @@
     "db:migrate": "prisma migrate dev"
   },
   "devDependencies": {
-    "prisma": "^4.9.0"
+    "@mermaid-js/mermaid-cli": "^9.3.0",
+    "prisma": "^4.9.0",
+    "prisma-erd-generator": "^1.2.5"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0"
