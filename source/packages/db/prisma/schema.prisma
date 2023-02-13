@@ -1,8 +1,119 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
+}
+
+generator erd {
+    provider = "prisma-erd-generator"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+enum ContributionAllowance {
+    FALSE /// No contributions allowed
+    CREATE_ONLY /// Only questions contribution
+    ANSWER_ONLY /// Only answers contribution
+    TRUE /// Both questions and answers contribution
+}
+
+model User {
+    id        String   @id @default(cuid())
+    username  String   @unique
+    password  String
+    email     String   @unique
+    name      String /// Display name of the user
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    ownedTopics          Topic[] /// Topics that the user created
+    topicsAdmin          TopicAdmin[] /// Topics that the user is admin of
+    quizContributor      TopicContributor[]
+    contributedQuestions Question[] /// Questions that the user created
+    attemptedQuizzes     QuizAttempt[] /// Attempts that the user made
+
+    @@index([id, username, name])
+}
+
+/// Topic of the quiz
+model Topic {
+    id                    String                @id @default(cuid())
+    name                  String /// Topic Name
+    isPublic              Boolean               @default(true) /// Is this topic allow guest contributions?
+    format                Json /// Format of questions
+    contributionAllowance ContributionAllowance @default(FALSE) /// Allowance of contributions
+    distribution          Json /// Distribution of questions for answer attempt
+
+    owner   User   @relation(fields: [ownerId], references: [id], onDelete: Restrict) /// Topic creator
+    ownerId String
+
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    quizAdmins       TopicAdmin[] /// Additional admin of the topic (Owner is admin but does not include in the list)
+    quizContributors TopicContributor[] /// Contributors of the topic
+    questions        Question[] /// Questions contributed to the topic
+    attempts         QuizAttempt[] /// Attempts of the topic
+
+    @@index([id, ownerId])
+}
+
+/// Admin of the topic
+model TopicAdmin {
+    topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+    topicId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+
+    createdAt DateTime @default(now())
+
+    @@id([topicId, userId])
+    @@index([userId])
+}
+
+/// Contributior of the topic
+model TopicContributor {
+    topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+    topicId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+
+    createdAt DateTime @default(now())
+
+    @@id([topicId, userId])
+    @@index([userId])
+}
+
+/// Questions contributed to the topic
+model Question {
+    id          Int    @id @default(autoincrement())
+    topic       Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+    topicId     String
+    creator     User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+    creatorId   String
+    question    Json /// Question and answer content
+    correctRate Float /// Correct rate of the question
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([topicId, creatorId])
+}
+
+/// Attempts of the topic
+model QuizAttempt {
+    id        Int    @id @default(autoincrement())
+    topic     Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+    topicId   String
+    user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
+    answers   Json /// Answers of the attempt
+    score     Int /// Score of the attempt
+    fullScore Int /// Full score of the attempt
+
+    createdAt  DateTime @default(now()) /// Start time of the attempt
+    attemptEnd DateTime /// End time of the attempt
+    updatedAt  DateTime @updatedAt
+
+    @@index([topicId, userId])
 }
