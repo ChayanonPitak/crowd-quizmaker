@@ -11,6 +11,9 @@
     },
     "dev": {
       "cache": false
-    }
+    },
+    "db:generate": {},
+    "db:push": {},
+    "db:migrate": {}
   }
 }
