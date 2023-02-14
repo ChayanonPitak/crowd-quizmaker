@@ -36,9 +36,6 @@ export class Topic {
   owner: User
 
   @Field()
-  ownerId: string
-
-  @Field()
   createdAt: Date
 
   @Field()

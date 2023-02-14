@@ -8,13 +8,7 @@ export class TopicAdmin {
   topic: Topic
 
   @Field()
-  topicId: string
-
-  @Field()
   user: User
-
-  @Field()
-  userId: string
 
   @Field()
   createdAt: Date

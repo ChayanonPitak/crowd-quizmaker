@@ -11,13 +11,7 @@ export class QuizAttempt {
   topic: Topic
 
   @Field()
-  topicId: string
-
-  @Field()
   user: User
-
-  @Field()
-  userId: string
 
   @Field()
   answers: string

@@ -11,13 +11,7 @@ export class Question {
   topic: Topic
 
   @Field()
-  topicId: string
-
-  @Field()
   creator: User
-
-  @Field()
-  creatorId: string
 
   @Field()
   question: string
