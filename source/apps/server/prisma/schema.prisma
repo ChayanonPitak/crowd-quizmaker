@@ -4,6 +4,10 @@ generator client {
     binaryTargets   = ["native", "rhel-openssl-1.0.x", "linux-arm64-openssl-1.0.x"]
 }
 
+generator typegraphql {
+    provider = "typegraphql-prisma"
+}
+
 generator erd {
     provider = "prisma-erd-generator"
 }
