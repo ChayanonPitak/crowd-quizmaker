@@ -1,12 +1,11 @@
 import { MouseEventHandler } from 'react'
 
 const QuizTopicItem = (props: {
-  id: string
   name: string
   manageFunction: MouseEventHandler<HTMLDivElement>
   deleteFunction: MouseEventHandler<HTMLDivElement>
 }) => {
-  const { id, name, manageFunction, deleteFunction } = props
+  const { name, manageFunction, deleteFunction } = props
   return (
     <div className="w-full h-20 bg-neutral-200 rounded-lg flex justify-between mb-3">
       <div className="w-1/2 h-full bg-neutral-500 text-white text-center font-semibold text-sm text-md md:text-xl xl:text-4xl overflow-clip whitespace-nowrap rounded-l-lg flex flex-col justify-center items-center">
