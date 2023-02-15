@@ -2,16 +2,18 @@ import { Button } from 'ui'
 import { useEffect, useState } from 'react'
 import Layout from '../components/layout'
 import Login from './login'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { haveToken, isAuthenticated } from '../utils/storage'
+import MainWorkspace from './main/workspace'
 
 const App = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (localStorage.getItem('token') === null) {
-      router.push('/login')
-    } else {
+    if (isAuthenticated()) {
       router.push('/main')
+    } else {
+      router.push('/login')
     }
   }, [])
 
