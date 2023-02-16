@@ -36,7 +36,7 @@ const MainWorkspace = () => {
     <>
       <Mainnav />
       <div
-        className="absolute transition duration-200 w-1/5 h-10 right-5 bg-neutral-500 hover:bg-neutral-600 text-white text-center font-semibold text-md md:text-xl lg:text-4xl overflow-clip whitespace-nowrap rounded-lg flex flex-col justify-center items-center"
+        className="absolute transition duration-200 -z-20 w-1/5 h-10 right-5 bg-neutral-500 hover:bg-neutral-600 text-white text-center font-semibold text-md md:text-xl lg:text-4xl overflow-clip whitespace-nowrap rounded-lg flex flex-col justify-center items-center"
         onClick={gotoCreate}
       >
         Create
