@@ -25,7 +25,6 @@ const MainWorkspace = () => {
     topics.push(
       <QuizTopicItem
         name={`Topic ${i}`}
-        id={`${i}`}
         key={`${i}`}
         manageFunction={() => manageTopic(`${i}`)}
         deleteFunction={() => setDeleteId(`${i}`)}
