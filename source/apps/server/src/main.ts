@@ -1,12 +1,25 @@
-import { ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
+import 'reflect-metadata'
+import { ApolloServer } from '@apollo/server'
+import { startStandaloneServer } from '@apollo/server/standalone'
+import { buildSchema } from 'type-graphql'
+import { UserResolver } from './graphql/user.resolver'
+
+const PORT = /*process.env.PORT ||*/ 3000
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-  app.useGlobalPipes(new ValidationPipe())
+  const schema = await buildSchema({
+    resolvers: [UserResolver],
+  })
 
-  await app.listen(3000)
-  console.log(`Application is running on: ${await app.getUrl()}`)
+  const server = new ApolloServer({
+    schema,
+    introspection: true,
+  })
+
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  })
+
+  console.log(`Server ready at ${url}`)
 }
 bootstrap()
