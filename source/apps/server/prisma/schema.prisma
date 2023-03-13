@@ -1,5 +1,11 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "metrics"]
+    binaryTargets   = ["native", "rhel-openssl-1.0.x", "linux-arm64-openssl-1.0.x"]
+}
+
+generator typegraphql {
+    provider = "typegraphql-prisma"
 }
 
 generator erd {

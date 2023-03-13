@@ -11,9 +11,9 @@
     "dev": "dotenv -- turbo run dev",
     "lint": "dotenv -- turbo run lint",
     "format": "dotenv -- prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:generate": "dotenv -- turbo run db:generate --filter db",
-    "db:push": "dotenv -- turbo run db:push",
-    "db:migrate": "dotenv -- turbo run db:migrate"
+    "db:generate": "dotenv -- turbo run db:generate --filter server",
+    "db:push": "dotenv -- turbo run db:push --filter server",
+    "db:migrate": "dotenv -- turbo run db:migrate --filter server"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
