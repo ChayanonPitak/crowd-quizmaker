@@ -1,13 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
-const core_1 = require("@nestjs/core");
-const app_module_1 = require("./app.module");
+require("reflect-metadata");
+const server_1 = require("@apollo/server");
+const standalone_1 = require("@apollo/server/standalone");
+const type_graphql_1 = require("type-graphql");
+const type_graphql_2 = require("@generated/type-graphql");
+const client_1 = require("@prisma/client");
+const PORT = 3000;
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.useGlobalPipes(new common_1.ValidationPipe());
-    await app.listen(3000);
-    console.log(`Application is running on: ${await app.getUrl()}`);
+    const prisma = new client_1.PrismaClient();
+    const schema = await (0, type_graphql_1.buildSchema)({
+        resolvers: type_graphql_2.resolvers,
+        dateScalarMode: 'isoDate',
+        validate: false,
+    });
+    const server = new server_1.ApolloServer({
+        schema,
+        introspection: true,
+    });
+    const { url } = await (0, standalone_1.startStandaloneServer)(server, {
+        context: async () => ({ prisma }),
+        listen: { port: 4000 },
+    });
+    console.log(`Server ready at ${url}`);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
