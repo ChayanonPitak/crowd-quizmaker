@@ -1,33 +1,47 @@
 import { FormEvent, useEffect, useState } from 'react'
-import Mainnav from '../../components/main/mainnav'
-import { useMutation, gql } from '@apollo/client'
+import Mainnav from '../../../components/main/mainnav'
+import { useMutation, gql, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-const CreateTopic = () => {
+const ManageTopic = () => {
   const router = useRouter()
-  const [page, setPage] = useState(0)
-  const [addTopic, { data, loading, error }] = useMutation(gql`
-    mutation CreateOneTopic($data: TopicCreateInput!) {
-      createOneTopic(data: $data) {
+  const { id } = router.query
+
+  const topicData = useQuery(
+    gql`
+      query Query($where: TopicWhereUniqueInput!) {
+        topic(where: $where) {
+          name
+          isPublic
+          format
+          distribution
+        }
+      }
+    `,
+    { variables: { where: { id } } }
+  )
+  const [editTopicquery, editTopicData] = useMutation(gql`
+    mutation Mutation(
+      $data: TopicUpdateInput!
+      $where: TopicWhereUniqueInput!
+    ) {
+      updateOneTopic(data: $data, where: $where) {
         id
       }
     }
   `)
 
-  const page0 = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setPage(1)
-  }
-
-  const page1 = (e: FormEvent<HTMLFormElement>) => {
+  const editTopic = (e: FormEvent<HTMLFormElement>) => {
     {
       e.preventDefault()
-      if (!loading)
-        addTopic({
+      if (!editTopicData.loading && !topicData.loading)
+        editTopicquery({
           variables: {
             data: {
-              name: document.getElementById('topicName')!.value,
-              isPublic: document.getElementById('isPublic')!.value == 'on',
+              name: { set: document.getElementById('topicName')!.value },
+              isPublic: {
+                set: document.getElementById('isPublic')!.value == 'on',
+              },
               distribution: {
                 question:
                   document.getElementById('allowance')!.value ==
@@ -39,30 +53,45 @@ const CreateTopic = () => {
                   document.getElementById('allowance')!.value == 'TRUE',
               },
               format: { type: 'MCHOICE' },
-              owner: { connect: { username: 'test1' } },
             },
+            where: { id },
           },
         })
     }
   }
 
   useEffect(() => {
-    if (loading) console.log('adding')
-    if (error) console.log(error)
-    if (data) router.push('/main/workspace')
+    if (topicData.data) {
+      document.getElementById('topicName')!.value = topicData.data
+        ? topicData.data!.topic.name
+        : ''
+      document.getElementById('isPublic')!.value = topicData.data
+        ? topicData.data!.topic.isPublic == 'on'
+          ? 'on'
+          : 'off'
+        : 'off'
+      document.getElementById('allowance')!.value = topicData.data
+        ? topicData.data!.topic.distribution.question
+          ? topicData.data!.topic.distribution.answer
+            ? 'TRUE'
+            : 'QUESTION_ONLY'
+          : topicData.data!.topic.distribution.answer
+          ? 'ANSWER_ONLY'
+          : 'FALSE'
+        : 'FALSE'
+    }
+    if (editTopicData.loading) console.log('editing')
+    if (editTopicData.error) console.log(editTopicData.error)
+    if (editTopicData.data) router.reload()
   })
 
   return (
     <>
       <Mainnav />
-      <div
-        className={`absolute inset-x-1 md:inset-x-32 lg:inset-x-56 mt-14 ${
-          page == 0 ? 'visible' : 'invisible'
-        }`}
-      >
+      <div className={`absolute inset-x-1 md:inset-x-32 lg:inset-x-56 mt-14`}>
         <div className="font-bold text-5xl">Create Topic</div>
         <div className="absolute inset-x-5 mt-14 text-3xl">
-          <form onSubmit={(e) => page0(e)}>
+          <form onSubmit={(e) => editTopic(e)}>
             <table className="w-full">
               <tbody>
                 <tr className="h-14">
@@ -116,32 +145,19 @@ const CreateTopic = () => {
                 </tr>
               </tbody>
             </table>
-            <input
-              type="submit"
-              value="Next"
-              className="absolute transition duration-200 w-1/5 h-10 mt-10 right-0 bg-black hover:bg-neutral-600 text-white text-center font-semibold text-md md:text-xl lg:text-2xl overflow-clip whitespace-nowrap rounded-lg flex flex-col justify-center items-center"
-            />
-          </form>
-        </div>
-      </div>
-      <div
-        className={`absolute inset-x-1 md:inset-x-32 lg:inset-x-56 mt-14 ${
-          page == 1 ? 'visible' : 'invisible'
-        }`}
-      >
-        <div className="font-bold text-5xl">Assign Quiz Contributor</div>
-        <div className="absolute inset-x-5 mt-14 text-3xl">
-          <form onSubmit={(e) => page1(e)}>
+            <div className="font-bold text-5xl my-5">
+              Assign Quiz Contributor
+            </div>
             <button
               type="button"
               className="absolute transition duration-200 w-1/5 h-10 mt-10 left-0 bg-black hover:bg-neutral-600 text-white text-center font-semibold text-md md:text-xl lg:text-2xl overflow-clip whitespace-nowrap rounded-lg flex flex-col justify-center items-center"
-              onClick={() => setPage(0)}
+              onClick={() => router.back()}
             >
               Back
             </button>
             <input
               type="submit"
-              value="Create"
+              value="Save"
               className="absolute transition duration-200 w-1/5 h-10 mt-10 right-0 bg-black hover:bg-neutral-600 text-white text-center font-semibold text-md md:text-xl lg:text-2xl overflow-clip whitespace-nowrap rounded-lg flex flex-col justify-center items-center"
             />
           </form>
@@ -151,4 +167,4 @@ const CreateTopic = () => {
   )
 }
 
-export default CreateTopic
+export default ManageTopic

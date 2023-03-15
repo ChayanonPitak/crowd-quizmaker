@@ -1,19 +1,43 @@
 import Router from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Mainnav from '../../components/main/mainnav'
 import QuizTopicItem from '../../components/main/quizTopicItem'
+import { useQuery, useMutation, gql } from '@apollo/client'
 
 const MainWorkspace = () => {
-  const topics: JSX.Element[] = []
+  const [topics, setTopics]: any[] = useState([])
 
   const [deleteId, setDeleteId] = useState('-1')
+  const [deleteName, setDeleteName] = useState('')
+
+  const topicData = useQuery(
+    gql`
+      query User($where: UserWhereUniqueInput!) {
+        user(where: $where) {
+          ownedTopics {
+            id
+            name
+          }
+        }
+      }
+    `,
+    { variables: { where: { username: 'test1' } }, pollInterval: 500 }
+  )
+
+  const [deleteTopicQuery, deleteTopicData] = useMutation(gql`
+    mutation Mutation($where: TopicWhereUniqueInput!) {
+      deleteOneTopic(where: $where) {
+        id
+      }
+    }
+  `)
 
   const gotoCreate = () => {
     Router.push('/topic/create')
   }
 
   const deleteTopic = (id: string) => {
-    console.log(`Deleted topic ${id}`)
+    deleteTopicQuery({ variables: { where: { id } } })
     setDeleteId('-1')
   }
 
@@ -21,16 +45,27 @@ const MainWorkspace = () => {
     Router.push(`/topic/${id}/manage`)
   }
 
-  for (let i = 0; i < 10; i++) {
-    topics.push(
-      <QuizTopicItem
-        name={`Topic ${i}`}
-        key={`${i}`}
-        manageFunction={() => manageTopic(`${i}`)}
-        deleteFunction={() => setDeleteId(`${i}`)}
-      />
-    )
-  }
+  useEffect(() => {
+    console.log(topicData)
+    if (topicData.data) {
+      console.log(topicData.data)
+      const temp: JSX.Element[] = []
+      for (const item of topicData.data.user.ownedTopics) {
+        temp.push(
+          <QuizTopicItem
+            name={item.name}
+            key={item.id}
+            manageFunction={() => manageTopic(item.id)}
+            deleteFunction={() => {
+              setDeleteId(item.id)
+              setDeleteName(item.name)
+            }}
+          />
+        )
+      }
+      setTopics(temp)
+    }
+  }, [])
   return (
     <>
       <Mainnav />
@@ -46,7 +81,7 @@ const MainWorkspace = () => {
       {deleteId !== '-1' && (
         <div className="fixed w-screen h-screen inset-0 bg-neutral-900 bg-opacity-50">
           <div className="fixed inset-5 md:inset-32 lg:inset-64 bg-neutral-800 text-white text-bold text-xl lg:text-2xl rounded-lg flex flex-col justify-center items-center text-center">
-            Are you sure you want to delete {deleteId}? <br />
+            Are you sure you want to delete {deleteName}? <br />
             This action is irreversible.
             <div className="w-3/4 h-1/2 flex justify-between content-end flex-wrap">
               <div
