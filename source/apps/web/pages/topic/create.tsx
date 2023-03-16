@@ -17,7 +17,8 @@ const CreateTopic = () => {
 
   const page0 = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setPage(1)
+    if ((document.getElementById('isPublic')!.value = 'on')) page1(e)
+    else setPage(1)
   }
 
   const page1 = (e: FormEvent<HTMLFormElement>) => {
