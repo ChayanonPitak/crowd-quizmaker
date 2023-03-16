@@ -89,7 +89,7 @@ const ManageTopic = () => {
     <>
       <Mainnav />
       <div className={`absolute inset-x-1 md:inset-x-32 lg:inset-x-56 mt-14`}>
-        <div className="font-bold text-5xl">Create Topic</div>
+        <div className="font-bold text-5xl">Manage Topic</div>
         <div className="absolute inset-x-5 mt-14 text-3xl">
           <form onSubmit={(e) => editTopic(e)}>
             <table className="w-full">

@@ -1,4 +1,4 @@
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Mainnav from '../../components/main/mainnav'
 import QuizTopicItem from '../../components/main/quizTopicItem'
@@ -6,6 +6,7 @@ import { useMutation, gql, ApolloClient } from '@apollo/client'
 import { isAuthenticated } from '../../utils/storage'
 
 const MainWorkspace = () => {
+  const router = useRouter()
   const [topics, setTopics]: any[] = useState([])
 
   const [deleteId, setDeleteId] = useState('-1')
@@ -20,16 +21,17 @@ const MainWorkspace = () => {
   `)
 
   const gotoCreate = () => {
-    Router.push('/topic/create')
+    router.push('/topic/create')
   }
 
   const deleteTopic = (id: string) => {
     deleteTopicQuery({ variables: { where: { id } } })
+    router.reload()
     setDeleteId('-1')
   }
 
   const manageTopic = (id: string) => {
-    Router.push(`/topic/${id}/manage`)
+    router.push(`/topic/${id}/manage`)
   }
 
   useEffect(() => {
@@ -56,19 +58,26 @@ const MainWorkspace = () => {
       if (topicData.data) {
         console.log(topicData.data)
         const temp: JSX.Element[] = []
-        for (const item of topicData.data.user.ownedTopics) {
+        if (topicData.data.user.ownedTopics.length > 0)
+          for (const item of topicData.data.user.ownedTopics) {
+            temp.push(
+              <QuizTopicItem
+                name={item.name}
+                key={item.id}
+                manageFunction={() => manageTopic(item.id)}
+                deleteFunction={() => {
+                  setDeleteId(item.id)
+                  setDeleteName(item.name)
+                }}
+              />
+            )
+          }
+        else
           temp.push(
-            <QuizTopicItem
-              name={item.name}
-              key={item.id}
-              manageFunction={() => manageTopic(item.id)}
-              deleteFunction={() => {
-                setDeleteId(item.id)
-                setDeleteName(item.name)
-              }}
-            />
+            <div className="text-black text-bold text-xl lg:text-2xl width-full height-full align-middle text-center">
+              Welcome! {isAuthenticated()!.name} <br /> Do you have a nice day?
+            </div>
           )
-        }
         setTopics(temp)
       }
     }

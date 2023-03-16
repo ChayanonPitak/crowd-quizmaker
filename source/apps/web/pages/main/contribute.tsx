@@ -41,16 +41,23 @@ const MainContribute = () => {
       if (topicData.data) {
         console.log(topicData.data)
         const temp: JSX.Element[] = []
-        for (const item of topicData.data.topics) {
-          const props: any = {}
-          props.name = item.name
-          props.key = item.id
-          if (item.distribution.question)
-            props.quizContributionFunction = () => manageQuestions(item.id)
-          if (item.distribution.answer)
-            props.attemptQuizFunction = () => attemptQuiz(item.id)
-          temp.push(<QuizContributionItem {...props} />)
-        }
+        if (topicData.data.topics.length > 0)
+          for (const item of topicData.data.topics) {
+            const props: any = {}
+            props.name = item.name
+            props.key = item.id
+            if (item.distribution.question)
+              props.quizContributionFunction = () => manageQuestions(item.id)
+            if (item.distribution.answer)
+              props.attemptQuizFunction = () => attemptQuiz(item.id)
+            temp.push(<QuizContributionItem {...props} />)
+          }
+        else
+          temp.push(
+            <div className="text-black text-bold text-xl lg:text-2xl width-full height-full align-middle text-center">
+              Welcome! {isAuthenticated()!.name} <br /> Do you have a nice day?
+            </div>
+          )
         setTopics(temp)
       }
     }
