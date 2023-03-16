@@ -32,7 +32,6 @@ const SignUp = () => {
   }
 
   useEffect(() => {
-    if (error) router.reload()
     if (data) router.push('/login')
   })
   return (
@@ -85,7 +84,7 @@ const SignUp = () => {
                   Password
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                   required
@@ -97,18 +96,17 @@ const SignUp = () => {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 required
               />
             </div>
-            <button
-              type="button"
+            <input
+              type="submit"
+              value="Sign Up"
               className="transition duration-200 bg-neutral-500 hover:bg-neutral-600 focus:bg-neutral-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-            >
-              <span className="inline-block mr-2">Sign Up</span>
-            </button>
+            />
           </div>
           <div className="py-5 text-center">
             Already have an account?{' '}
