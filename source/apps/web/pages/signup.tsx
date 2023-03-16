@@ -1,11 +1,48 @@
+import { gql, useMutation } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const SignUp = () => {
+  const router = useRouter()
+  const [addUser, { data, loading, error }] = useMutation(gql`
+    mutation Mutation($data: UserCreateInput!) {
+      createOneUser(data: $data) {
+        id
+      }
+    }
+  `)
+  const signUp = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!loading)
+      addUser({
+        variables: {
+          data: {
+            email: document.getElementById('email')!.value,
+            name:
+              document.getElementById('firstname')!.value +
+              ' ' +
+              document.getElementById('lastname')!.value,
+            username: document.getElementById('username')!.value,
+            password: document.getElementById('password')!.value,
+          },
+        },
+      })
+  }
+
+  useEffect(() => {
+    if (error) router.reload()
+    if (data) router.push('/login')
+  })
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 className="font-bold text-center text-2xl mb-5">Sign Up</h1>
-        <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+        <form
+          className="bg-white shadow w-full rounded-lg divide-y divide-gray-200"
+          onSubmit={(e) => signUp(e)}
+        >
           <div className="px-5 py-7">
             <div className="flex flex-row">
               <div className="px-2">
@@ -14,7 +51,9 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
+                  id="firstname"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  required
                 />
               </div>
               <div className="px-2">
@@ -23,7 +62,9 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
+                  id="lastname"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  required
                 />
               </div>
             </div>
@@ -34,7 +75,9 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
+                  id="username"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  required
                 />
               </div>
               <div className="px-2">
@@ -43,7 +86,9 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
+                  id="password"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  required
                 />
               </div>
             </div>
@@ -53,7 +98,9 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
+                id="email"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                required
               />
             </div>
             <button
@@ -69,7 +116,7 @@ const SignUp = () => {
               <Link href="/login">LOGIN</Link>
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )

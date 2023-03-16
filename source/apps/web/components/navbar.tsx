@@ -7,15 +7,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import { Fragment, useContext, useEffect, useState } from 'react'
-import { clearToken, haveToken, logout } from '../utils/storage'
+import { isAuthenticated, logout } from '../utils/storage'
 import UserContext from '../utils/UserContext'
-
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
 
 const userNavigation = [{ name: 'Log out', href: '#' }]
 
@@ -25,10 +18,10 @@ function classNames(...classes: string[]) {
 
 const Navbar = () => {
   const router = useRouter()
-  const [currentUser, setCurrentUser] = useContext(UserContext)
+  const [currentUser, setCurrentUser]: any = useState()
 
   useEffect(() => {
-    console.log(user)
+    setCurrentUser(isAuthenticated())
   }, [])
 
   const onLogout = async () => {
@@ -70,7 +63,7 @@ const Navbar = () => {
                   >
                     <Menu.Items className="absolute right-0 top-2 z-40 mt-2 w-48 origin-top-right rounded-md bg-neutral-500 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="text-center text-white my-2">
-                        Username
+                        {currentUser.name}
                       </div>
                       <Menu.Item>
                         {({ active }) => (

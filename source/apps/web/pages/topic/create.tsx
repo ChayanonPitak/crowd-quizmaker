@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react'
 import Mainnav from '../../components/main/mainnav'
 import { useMutation, gql } from '@apollo/client'
 import { useRouter } from 'next/router'
+import { isAuthenticated } from '../../utils/storage'
 
 const CreateTopic = () => {
   const router = useRouter()
@@ -39,7 +40,7 @@ const CreateTopic = () => {
                   document.getElementById('allowance')!.value == 'TRUE',
               },
               format: { type: 'MCHOICE' },
-              owner: { connect: { username: 'test1' } },
+              owner: { connect: { id: isAuthenticated()!.id } },
             },
           },
         })

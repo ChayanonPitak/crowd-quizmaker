@@ -2,27 +2,14 @@ import Router from 'next/router'
 import { useEffect, useState } from 'react'
 import Mainnav from '../../components/main/mainnav'
 import QuizTopicItem from '../../components/main/quizTopicItem'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useMutation, gql, ApolloClient } from '@apollo/client'
+import { isAuthenticated } from '../../utils/storage'
 
 const MainWorkspace = () => {
   const [topics, setTopics]: any[] = useState([])
 
   const [deleteId, setDeleteId] = useState('-1')
   const [deleteName, setDeleteName] = useState('')
-
-  const topicData = useQuery(
-    gql`
-      query User($where: UserWhereUniqueInput!) {
-        user(where: $where) {
-          ownedTopics {
-            id
-            name
-          }
-        }
-      }
-    `,
-    { variables: { where: { username: 'test1' } }, pollInterval: 500 }
-  )
 
   const [deleteTopicQuery, deleteTopicData] = useMutation(gql`
     mutation Mutation($where: TopicWhereUniqueInput!) {
@@ -46,25 +33,47 @@ const MainWorkspace = () => {
   }
 
   useEffect(() => {
-    console.log(topicData)
-    if (topicData.data) {
-      console.log(topicData.data)
-      const temp: JSX.Element[] = []
-      for (const item of topicData.data.user.ownedTopics) {
-        temp.push(
-          <QuizTopicItem
-            name={item.name}
-            key={item.id}
-            manageFunction={() => manageTopic(item.id)}
-            deleteFunction={() => {
-              setDeleteId(item.id)
-              setDeleteName(item.name)
-            }}
-          />
-        )
+    const fetchTopics = async () => {
+      const data = await fetch('http://localhost:4000/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: `
+            query User($where: UserWhereUniqueInput!) {
+              user(where: $where) {
+                ownedTopics {
+                  id
+                  name
+                }
+              }
+            }
+          `,
+          variables: { where: { id: isAuthenticated()!.id } },
+        }),
+      })
+      const topicData = await data.json()
+
+      if (topicData.data) {
+        console.log(topicData.data)
+        const temp: JSX.Element[] = []
+        for (const item of topicData.data.user.ownedTopics) {
+          temp.push(
+            <QuizTopicItem
+              name={item.name}
+              key={item.id}
+              manageFunction={() => manageTopic(item.id)}
+              deleteFunction={() => {
+                setDeleteId(item.id)
+                setDeleteName(item.name)
+              }}
+            />
+          )
+        }
+        setTopics(temp)
       }
-      setTopics(temp)
     }
+
+    fetchTopics()
   }, [])
   return (
     <>
