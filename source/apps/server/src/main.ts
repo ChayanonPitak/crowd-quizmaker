@@ -1,16 +1,18 @@
 import 'reflect-metadata'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { buildSchema } from 'type-graphql'
-import { resolvers } from '@generated/type-graphql'
-import { PrismaClient } from '@prisma/client'
+import { buildSchema, Resolver, Query} from 'type-graphql'
+import { resolvers as generatedResolvers } from '@generated/type-graphql'
+import { PrismaClient, Question } from '@prisma/client'
+import { CustomUserResolver } from './resolvers'
 
 const PORT = /*process.env.PORT ||*/ 3000
 
 async function bootstrap() {
   const prisma = new PrismaClient()
+
   const schema = await buildSchema({
-    resolvers,
+    resolvers: [...generatedResolvers, CustomUserResolver],
     dateScalarMode: 'isoDate',
     validate: false,
   })
@@ -27,4 +29,5 @@ async function bootstrap() {
 
   console.log(`Server ready at ${url}`)
 }
+
 bootstrap()

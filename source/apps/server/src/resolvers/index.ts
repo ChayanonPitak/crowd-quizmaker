@@ -6,7 +6,7 @@ import { Context } from 'vm';
 @Resolver()
 export class CustomUserResolver {
     @Query(() => [Question])
-    async randomQuestion(@Ctx() { prisma }: Context, @Arg("topicId") topicId: String) {
+    async randomQuestions(@Ctx() { prisma }: Context, @Arg("topicId") topicId: String) {
         const result = await prisma.$queryRaw`SELECT * FROM Question WHERE topicId=${topicId} ORDER BY RAND() LIMIT 3`
         return result
     }
