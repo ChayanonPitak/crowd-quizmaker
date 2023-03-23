@@ -1,8 +1,7 @@
-import { Button } from 'ui'
 import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { haveToken, login, saveToken } from '../utils/storage'
+import { isAuthenticated, login } from '../utils/storage'
 import UserContext from '../utils/UserContext'
 import UserProps from '../utils/UserProps'
 
@@ -17,11 +16,12 @@ const Login = () => {
     console.log('password: ' + password)
 
     try {
-      const user: UserProps = await login(username, password)
-      setCurrentUser(user)
+      const user: UserProps | null = await login(username, password)
+      if (user !== null) setCurrentUser(user)
     } catch (err) {}
 
-    router.push('/main/workspace')
+    if (isAuthenticated()) router.push('/main/workspace')
+    else router.reload()
   }
 
   return (
@@ -35,6 +35,7 @@ const Login = () => {
             </label>
             <input
               type="text"
+              required
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -43,6 +44,7 @@ const Login = () => {
             </label>
             <input
               type="password"
+              required
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               onChange={(e) => setPassword(e.target.value)}
             />

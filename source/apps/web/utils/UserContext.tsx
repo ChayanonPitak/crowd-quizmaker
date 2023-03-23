@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import Login from '../pages/login'
 import Main from '../pages/main'
-import { haveToken, isAuthenticated } from './storage'
+import { isAuthenticated } from './storage'
 import UserProps from './UserProps'
 
 const UserContext = createContext<
@@ -19,7 +19,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let cuser: UserProps = isAuthenticated()
+      let cuser: UserProps | null = isAuthenticated()
       console.log(cuser)
       if (cuser === null) {
         localStorage.setItem('user', '')

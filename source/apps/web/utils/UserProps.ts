@@ -1,6 +1,6 @@
 type UserProps = {
-  username: string
-  token: string
+  id: string
+  name: string
 }
 
 export default UserProps
