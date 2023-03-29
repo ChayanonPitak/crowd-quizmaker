@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{tikz}
+\usepackage{pdfpages}
 
 \graphicspath{ {./images/} }
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{0.5em}{}
@@ -29,7 +30,7 @@
             \Huge\textbf{A7 - System documentation} \\[2\baselineskip]
             \large\textbf{for} \\
             \huge\textbf{Crowd Quizmaker} \\[2\baselineskip]
-            \large\textbf{Version 1.0} \\[2\baselineskip]
+            \large\textbf{Version 1.1} \\[2\baselineskip]
             \large\textbf{Prepared by} \LARGE\textbf{0N3 N16H7 PR0J3C7} \\[0.5\baselineskip]
             \normalsize{
                 Suwat Inkaew 610610521 \\
@@ -50,6 +51,8 @@
                 \textbf{Name} & \textbf{Date} & \textbf{Reason for changes} & \textbf{Version}\\ 
                 \hline\hline
                 Chayanon & 23 Mar 2023 & Complete of Sprint\#2 & 1.0 \\
+                \hline
+                Chayanon & 30 Mar 2023 & Add A4 \& A6 & 1.1 \\
                 \hline
             \end{tabular}
         }
@@ -345,7 +348,7 @@
     % end A1
 
     % A2 - SRS
-    \chapter{Software Requirement Specification}
+    \chapter{A2 - Software Requirement Specification}
     \section{Introduction}
         % Purpose
         \subsection{Purpose}
@@ -541,12 +544,17 @@
     % end A2
 
     % A3 - Design Specification (A-DAPT)
-    \chapter{Design Specification}
+    \chapter{A3 - Design Specification}
     Due to size issue, please visit \href{https://github.com/IkaWaAyuMu/261361-Project/blob/main/documents/A3/A3 1.0.pdf}{here} for the design specification.
     % end A3
 
+    % A4 - Sprint #1
+    \chapter{A4 - Sprint \#1}
+    \pagebreak
+    \includepdf[pages=-]{../A4/A4.pdf}
+
     % A5 - Test Document
-    \chapter{Test Document}
+    \chapter{A5 - Test Document}
 
     Software Name : Crowd Quizmaker
     Team name: 0N3 N16H7 PR0J3C7
@@ -651,6 +659,11 @@
     The testing team encountered several challenges during the testing process, including lack of communication, diversity in the testing environment and inadequate testing, which affected the testing effort.
     
     Overall, the testing effort was successful in identifying defects and areas for improvement in the software.
+
+    % A6 - Sprint #2
+    \chapter{A6 - Sprint \#2}
+    \pagebreak
+    \includepdf[pages=-]{../A6/A6.pdf}
     
 
     \pagenumbering{roman}
